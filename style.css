@@ -10,20 +10,27 @@ html, body {
     margin: 0 auto;
 }
 
-#playerCards, #nextRound, #round0, #round1, #round2, #round3, #round4 {
-    display: none;
-}
-
 #playerList p {
     font-size: 2rem;
     margin: 0;
 }
 
-#nextRound {
+#roundButtons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#previousRound {
+    background-color: red;
+}
+
+#nextRound, #previousRound {
     margin: 0;
-    bottom: 0;
-    position: fixed;
-    max-width: 50rem;
+}
+
+#previousRound:disabled {
+    opacity: 0.4;
+    cursor: default;
 }
 
 h1 {
@@ -109,12 +116,4 @@ button:focus {
 .scoreBoardItem {
     font-size: 1.7rem;
     font-family: 'Libre Baskerville', serif;
-}
-
-.visible {
-    display: block !important;
-}
-
-.hidden {
-    display: none;
 }

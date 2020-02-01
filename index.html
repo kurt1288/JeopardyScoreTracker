@@ -7,44 +7,65 @@
     <title>Jeopardy Scorecard</title>
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Questrial&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
     <div id="container">
-        <div id="round0">
-            <h1>Jeopardy Scorecard</h1>
-            <h2>Players</h2>
-            <div id="playerList"></div>
-            <input type="text" id="newPlayerName" placeholder="Player's Name">
-            <button id="addPlayer">ADD PLAYER</button>
-            <button id="startGame">START GAME</button>
+        <div v-if="potentialPoints === 0">
+            <div id="scoreBoard" v-if="round !== 0 && round !== 4">
+                <p v-for="player in players" class="scoreBoardItem">{{ player.name }}: {{ player.score }}</p>
+            </div>
+            <div id="round0" v-if="round === 0">
+                <h1>Jeopardy Scorecard</h1>
+                <h2>Players</h2>
+                <div id="playerList">
+                    <p v-for="player in players">{{ player.name }}</p>
+                </div>
+                <input type="text" id="newPlayerName" placeholder="Player's Name" v-model="newPlayerName" @keyup.enter="addPlayer">
+                <button id="addPlayer" @click="addPlayer">ADD PLAYER</button>
+                <button id="startGame" @click="startGame">START GAME</button>
+            </div>
+            <div id="round1" v-else-if="round === 1">
+                <button class="scoreButton" v-for="points in round1Points" v-bind:value="points" @click="potentialPoints = points">{{ points }}</button>
+            </div>
+            <div id="round2" v-else-if="round === 2">
+                <button class="scoreButton" v-for="points in round2Points" v-bind:value="points" @click="potentialPoints = points">{{ points }}</button>
+            </div>
+            <div id="round3" v-else-if="round === 3">
+                <h2>Final Jeopardy</h2>
+                <button class="scoreButton" value="5000" @click="potentialPoints = 5000">5000</button>
+            </div>
+            <div id="round4" v-else-if="round === 4">
+                <h2>Final Scores</h2>
+                <div v-for="player in players">
+                    <h2>{{ player.name }}</h2>
+                    <p>Score: {{ player.score }}</p>
+                    <p>Round 1:</p>
+                    <ul>
+                        <li v-for="(points, index) in player.points.round1">
+                            {{ index }}: {{ points }}
+                        </li>
+                    </ul>
+                    <p>Round 2:</p>
+                    <ul>
+                        <li v-for="(points, index) in player.points.round2">
+                            {{ index }}: {{ points }}
+                        </li>
+                    </ul>
+                    <p>Final Jeopardy</p>
+                    {{ player.points.round3[5000] === 1 ? "Yes" : "No" }}
+                </div>
+            </div>
+            <div id="roundButtons">
+                <button id="previousRound" v-if="round >= 1 && round <= 3" @click="round--" v-bind:disabled="round === 1">Previous Round</button>
+                <button id="nextRound" v-if="round >= 1 && round <= 3" @click="round++">{{ round <= 2 ? "Next Round" : "End Game" }}</button>
+            </div>
         </div>
-        <div id="round4">
-            <h2>Final Score</h2>
+        <div id="playerCards" v-if="potentialPoints !== 0">
+            <button class="playerCard" v-for="player in players" v-bind:data-name="player.name" v-bind:key="player.name" @click="givePlayerPoints(player.name)">{{ player.name }}</button>
+            <button id="goBack" @click="potentialPoints = 0">Go Back</button>
         </div>
-        <div id="scoreBoard"></div>
-        <div id="round1">
-            <button class="scoreButton" value="200">200</button>
-            <button class="scoreButton" value="400">400</button>
-            <button class="scoreButton" value="600">600</button>
-            <button class="scoreButton" value="800">800</button>
-            <button class="scoreButton" value="1000">1000</button>
-        </div>
-        <div id="round2">
-            <button class="scoreButton" value="400">400</button>
-            <button class="scoreButton" value="800">800</button>
-            <button class="scoreButton" value="1200">1200</button>
-            <button class="scoreButton" value="1600">1600</button>
-            <button class="scoreButton" value="2000">2000</button>
-        </div>
-        <div id="round3">
-            <h2>Final Jeopardy</h2>
-            <button class="scoreButton" value="5000">5000</button>
-        </div>
-        <div id="playerCards">
-            <button id="goBack">Go Back</button>
-        </div>
-        <button id="nextRound">Next Round</button>
     </div>
     <template id="playerCard">
         <button class="playerCard"></button>
