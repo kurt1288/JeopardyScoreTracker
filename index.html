@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jeopardy Scorecard</title>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Questrial&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="round0">
+            <h1>Jeopardy Scorecard</h1>
+            <h2>Players</h2>
+            <div id="playerList"></div>
+            <input type="text" id="newPlayerName" placeholder="Player's Name">
+            <button id="addPlayer">ADD PLAYER</button>
+            <button id="startGame">START GAME</button>
+        </div>
+        <div id="round4">
+            <h2>Final Score</h2>
+        </div>
+        <div id="scoreBoard"></div>
+        <div id="round1">
+            <button class="scoreButton" value="200">200</button>
+            <button class="scoreButton" value="400">400</button>
+            <button class="scoreButton" value="600">600</button>
+            <button class="scoreButton" value="800">800</button>
+            <button class="scoreButton" value="1000">1000</button>
+        </div>
+        <div id="round2">
+            <button class="scoreButton" value="400">400</button>
+            <button class="scoreButton" value="800">800</button>
+            <button class="scoreButton" value="1200">1200</button>
+            <button class="scoreButton" value="1600">1600</button>
+            <button class="scoreButton" value="2000">2000</button>
+        </div>
+        <div id="round3">
+            <h2>Final Jeopardy</h2>
+            <button class="scoreButton" value="5000">5000</button>
+        </div>
+        <div id="playerCards">
+            <button id="goBack">Go Back</button>
+        </div>
+        <button id="nextRound">Next Round</button>
+    </div>
+    <template id="playerCard">
+        <button class="playerCard"></button>
+    </template>
+</body>
+</html>
