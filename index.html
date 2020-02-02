@@ -38,9 +38,9 @@
             </div>
             <div id="round4" v-else-if="round === 4">
                 <h2>Final Scores</h2>
-                <div v-for="player in players">
+                <div v-for="player in players" class="playerStats">
                     <h2>{{ player.name }}</h2>
-                    <p>Score: {{ player.score }}</p>
+                    <p class="finalScore">Score: {{ player.score }}</p>
                     <p>Round 1:</p>
                     <ul>
                         <li v-for="(points, index) in player.points.round1">

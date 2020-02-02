@@ -1,6 +1,6 @@
-window.onbeforeunload = () => {
+window.addEventListener("beforeunload", () => {
     return "Are you sure you wish to leave?";
-}
+});
 
 class Player {
     name;
