@@ -71,7 +71,7 @@ button:focus {
     background-color: #060ce9;
 }
 
-#startGame, #nextRound {
+#startGame, #nextRound, #newGame {
     background-color: green;
 }
 
@@ -135,4 +135,8 @@ button:focus {
 
 .finalScore {
     font-size: 1.8rem;
+}
+
+.playerStats:last-of-type {
+    margin-bottom: 1rem;
 }
