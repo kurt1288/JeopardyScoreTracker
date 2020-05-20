@@ -59,7 +59,7 @@
                 <button id="newGame" @click="startNewGame">New Game</button>
             </div>
             <div id="roundButtons">
-                <button id="previousRound" v-if="round >= 1 && round <= 3" @click="round--" v-bind:disabled="round === 1">Previous Round</button>
+                <button id="previousRound" v-if="round >= 1" @click="round--" v-bind:disabled="round === 1">Previous Round</button>
                 <button id="nextRound" v-if="round >= 1 && round <= 3" @click="round++">{{ round <= 2 ? "Next Round" : "End Game" }}</button>
             </div>
         </div>
