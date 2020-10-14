@@ -24,7 +24,7 @@
                 </div>
                 <input type="text" id="newPlayerName" placeholder="Player's Name" v-model="newPlayerName" @keyup.enter="addPlayer">
                 <button id="addPlayer" @click="addPlayer">ADD PLAYER</button>
-                <button id="startGame" @click="startGame">START GAME</button>
+                <button id="startGame" @click="startGame" :disabled="players.length === 0">START GAME</button>
             </div>
             <div id="round1" v-else-if="round === 1">
                 <button class="scoreButton" v-for="points in round1Points" v-bind:value="points" @click="potentialPoints = points">{{ points }}</button>

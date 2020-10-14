@@ -140,3 +140,8 @@ button:focus {
 .playerStats:last-of-type {
     margin-bottom: 1rem;
 }
+
+button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
