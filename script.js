@@ -39,19 +39,28 @@ class Player {
 
 document.addEventListener("DOMContentLoaded", () => {
     let players = null;
-    if (window.localStorage.getItem("players") !== null) {
-        players = JSON.parse(window.localStorage.getItem("players"));
-    }
-
+    
     const app = new Vue({
         el: "#container",
         data: {
             players: players === null ? [] : players,
-            round: players === null ? 0 : 1,
+            round: 0,
             newPlayerName: null,
             round1Points: [ 200, 400, 600, 800, 1000 ],
             round2Points: [ 400, 800, 1200, 1600, 2000 ],
             potentialPoints: 0
+        },
+        mounted: function() {
+            if (localStorage.getItem("players") !== null) {
+                for (let item of JSON.parse(window.localStorage.getItem("players"))) {
+                    let player = new Player(item.name);
+                    player.points = item.points;
+                    player.score = item.score;
+                    this.players.push(player);
+                }
+
+                this.startGame();
+            }
         },
         methods: {
             addPlayer() {
