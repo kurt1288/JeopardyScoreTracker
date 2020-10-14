@@ -104,6 +104,10 @@ button:focus {
     border-bottom: 0.7rem solid black;
 }
 
+#subtractPoints {
+    background-color: purple;
+}
+
 #goBack {
     background-color: #ff5252;
     color: white;

@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
             newPlayerName: null,
             round1Points: [ 200, 400, 600, 800, 1000 ],
             round2Points: [ 400, 800, 1200, 1600, 2000 ],
-            potentialPoints: 0
+            potentialPoints: 0,
+            subtract: false
         },
         mounted: function() {
             if (localStorage.getItem("players") !== null) {
@@ -75,8 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.round++;
             },
             givePlayerPoints(name) {
+                if (this.subtract)
+                    this.potentialPoints = this.potentialPoints * -1;
+
                 this.players.find(x => x.name === name).GivePoints(this.potentialPoints, this.round);
-                this.potentialPoints = 0;
+                this.goBack();
             },
             startNewGame() {
                 this.round = 0;
@@ -85,6 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.$nextTick(() => {
                     window.localStorage.removeItem("players");
                 })
+            },
+            goBack() {
+                this.potentialPoints = 0;
+                this.subtract = false;
             }
         },
         watch: {
