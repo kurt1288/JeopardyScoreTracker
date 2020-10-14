@@ -64,7 +64,9 @@
             </div>
         </div>
         <div id="playerCards" v-if="potentialPoints !== 0">
-            <button class="playerCard" v-for="player in players" v-bind:data-name="player.name" v-bind:key="player.name" @click="givePlayerPoints(player.name)">{{ player.name }}</button>
+            <div>
+                <button class="playerCard" v-for="player in players" v-bind:data-name="player.name" v-bind:key="player.name" @click="givePlayerPoints(player.name)">{{ player.name }}</button>
+            </div>
             <button id="goBack" @click="potentialPoints = 0">Go Back</button>
         </div>
     </div>
