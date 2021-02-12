@@ -84,6 +84,10 @@ button, #newPlayerName, .scoreButton, #subtractPoints + label {
   padding: 0;
 }
 
+.points:last-of-type {
+  border-bottom: 0.7rem solid black;
+}
+
 #goBack {
   background-color: #ff5252;
   color: white;
