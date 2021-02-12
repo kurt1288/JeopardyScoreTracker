@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/JeopardyScoreTracker/static/css/main.ab1a4d3d.chunk.css",
+    "main.css": "/JeopardyScoreTracker/static/css/main.c489f07a.chunk.css",
     "main.js": "/JeopardyScoreTracker/static/js/main.5eb8b9c6.chunk.js",
     "main.js.map": "/JeopardyScoreTracker/static/js/main.5eb8b9c6.chunk.js.map",
     "runtime-main.js": "/JeopardyScoreTracker/static/js/runtime-main.05a0a81a.js",
@@ -8,13 +8,13 @@
     "static/js/2.a5ba2290.chunk.js": "/JeopardyScoreTracker/static/js/2.a5ba2290.chunk.js",
     "static/js/2.a5ba2290.chunk.js.map": "/JeopardyScoreTracker/static/js/2.a5ba2290.chunk.js.map",
     "index.html": "/JeopardyScoreTracker/index.html",
-    "static/css/main.ab1a4d3d.chunk.css.map": "/JeopardyScoreTracker/static/css/main.ab1a4d3d.chunk.css.map",
+    "static/css/main.c489f07a.chunk.css.map": "/JeopardyScoreTracker/static/css/main.c489f07a.chunk.css.map",
     "static/js/2.a5ba2290.chunk.js.LICENSE.txt": "/JeopardyScoreTracker/static/js/2.a5ba2290.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.05a0a81a.js",
     "static/js/2.a5ba2290.chunk.js",
-    "static/css/main.ab1a4d3d.chunk.css",
+    "static/css/main.c489f07a.chunk.css",
     "static/js/main.5eb8b9c6.chunk.js"
   ]
 }
