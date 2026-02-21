@@ -1,0 +1,11 @@
+{
+  "prettier": {
+    "semi": true,
+    "allowed": true,
+    "tabWidth": 4,
+    "bracketSpacing": true,
+    "jsxSingleQuote": true,
+    "singleQuote": true,
+  },
+  "format_on_save": "on",
+}
