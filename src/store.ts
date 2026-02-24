@@ -14,6 +14,7 @@ export type ValidPointValue =
     | 5000;
 
 interface ScoreEntry {
+    timestamp: number;
     value: ValidPointValue;
     round: 0 | 1 | 2 | 3;
     isCorrect: boolean;
@@ -58,14 +59,24 @@ watch(
 export const gameStore = {
     state,
 
+    auditLog: computed(() => {
+        return state.players
+            .flatMap((player) =>
+                player.history.map((entry) => ({
+                    ...entry,
+                    playerName: player.name,
+                    playerId: player.id,
+                })),
+            )
+            .sort((a, b) => b.timestamp - a.timestamp); // Newest first
+    }),
+
     playerStats: computed(() => {
         return state.players.map((player) => {
             const getCount = (round: number, value: number) => {
-                // Only count the net positive answers
-                return player.history.filter(
-                    (h) =>
-                        h.round === round && h.value === value && h.isCorrect,
-                ).length;
+                return player.history
+                    .filter((h) => h.round === round && h.value === value)
+                    .reduce((acc, h) => acc + (h.isCorrect ? 1 : -1), 0); // sum the occurrences: +1 for correct, -1 for incorrect
             };
 
             return {
@@ -85,18 +96,6 @@ export const gameStore = {
         });
     }),
 
-    toggleStats() {
-        state.isStatsOpen = !state.isStatsOpen;
-    },
-
-    selectPoints(points: ValidPointValue) {
-        state.pendingPoints = points;
-    },
-
-    closeModal() {
-        state.pendingPoints = null;
-    },
-
     addPlayer(name: string) {
         state.players.push({
             id: Date.now(),
@@ -111,42 +110,35 @@ export const gameStore = {
 
         const player = state.players[playerIndex];
         const points = state.pendingPoints;
-        const currentRound = state.currentRound;
 
         if (!player) return;
 
+        player.history.push({
+            timestamp: Date.now(),
+            value: points,
+            round: state.currentRound,
+            isCorrect: isCorrect,
+        });
+
         if (isCorrect) {
             player.totalScore += points;
-            player.history.push({
-                value: points,
-                round: currentRound,
-                isCorrect: true,
-            });
         } else {
             player.totalScore -= points;
-
-            const index = player.history.findIndex(
-                (h) =>
-                    h.value === points &&
-                    h.round === currentRound &&
-                    h.isCorrect,
-            );
-
-            if (index !== -1) {
-                // Remove the previous "correct" entry so the count goes down
-                player.history.splice(index, 1);
-            } else {
-                // If they didn't have a correct one yet, we just record the negative
-                // but the 'count' won't increase because isCorrect is false
-                player.history.push({
-                    value: points,
-                    round: currentRound,
-                    isCorrect: false,
-                });
-            }
         }
 
         this.closeModal();
+    },
+
+    closeModal() {
+        state.pendingPoints = null;
+    },
+
+    toggleStats() {
+        state.isStatsOpen = !state.isStatsOpen;
+    },
+
+    selectPoints(points: ValidPointValue) {
+        state.pendingPoints = points;
     },
 
     nextRound() {
