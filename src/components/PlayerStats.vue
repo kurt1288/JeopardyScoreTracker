@@ -20,9 +20,7 @@ const getCount = (player: any, round: number, val: number) => {
                     >
                         <div class="player-header">
                             <span class="p-name">{{ player.name }}</span>
-                            <span class="p-total">{{
-                                player.totalScore.toLocaleString()
-                            }}</span>
+                            <span class="p-total">{{ player.totalScore }}</span>
                         </div>
                     </th>
                 </tr>
@@ -134,11 +132,12 @@ thead th {
     font-size: 1.2rem;
     font-weight: bold;
     white-space: nowrap;
+    text-transform: uppercase;
 }
 .p-total {
     color: #f8d90e;
     font-family: monospace;
-    font-size: 1.4rem;
+    font-size: 2rem;
 }
 
 /* Sticky Left Column for point values */
