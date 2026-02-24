@@ -96,12 +96,18 @@ const getCount = (player: any, round: number, val: number) => {
             </tbody>
         </table>
     </div>
+    <div class="audit-log">
+        <p class="audit-header">Audit Log</p>
+        <p v-for="item in gameStore.auditLog.value" class="audit-item">
+            {{ item.playerName.toUpperCase() }}: {{ item.isCorrect ? '+' : '-'
+            }}{{ item.value }}
+        </p>
+    </div>
 </template>
 
 <style scoped>
 .comparison-container {
     width: 100%;
-    overflow-x: auto; /* Allow side-swiping if many players */
     background: #000;
 }
 
@@ -112,7 +118,6 @@ const getCount = (player: any, round: number, val: number) => {
     text-align: center;
 }
 
-/* Header Styling */
 thead th {
     padding: 15px;
     background: #111;
@@ -140,7 +145,6 @@ thead th {
     font-size: 2rem;
 }
 
-/* Sticky Left Column for point values */
 .sticky-col {
     position: sticky;
     left: 0;
@@ -151,7 +155,6 @@ thead th {
     border-right: 1px solid #333;
 }
 
-/* Row Styling */
 .section-divider td {
     background: #222;
     font-size: 0.7rem;
@@ -176,15 +179,25 @@ td {
     font-size: 1.4rem;
 }
 
-/* The Data Points */
 .cell-count {
     font-size: 1.4rem;
     font-weight: 800;
-    color: #333; /* Dark when 0 */
+    color: #333;
 }
 
 .cell-count.active {
     color: #fff;
     text-shadow: 0 0 10px #060ce9;
+}
+
+.audit-log {
+    padding: 1rem;
+    background: black;
+}
+
+.audit-header {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #7c7c7c;
 }
 </style>

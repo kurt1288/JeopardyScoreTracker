@@ -85,7 +85,7 @@ const boards: Record<number, ValidPointValue[]> = {
     display: flex;
     flex-direction: column;
     color: white;
-    padding-bottom: 20px;
+    overflow-y: auto;
 }
 
 .close-zone {
