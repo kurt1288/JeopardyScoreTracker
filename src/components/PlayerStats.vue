@@ -97,11 +97,30 @@ const getCount = (player: any, round: number, val: number) => {
         </table>
     </div>
     <div class="audit-log">
-        <p class="audit-header">Audit Log</p>
-        <p v-for="item in gameStore.auditLog.value" class="audit-item">
-            {{ item.playerName.toUpperCase() }}: {{ item.isCorrect ? '+' : '-'
-            }}{{ item.value }}
-        </p>
+        <p class="audit-header">AUDIT LOG</p>
+        <div class="audit-list">
+            <div
+                v-for="item in gameStore.auditLog.value"
+                :key="item.timestamp"
+                class="audit-row"
+            >
+                <div>
+                    <span
+                        class="audit-sign"
+                        :class="item.isCorrect ? 'plus' : 'minus'"
+                    >
+                        {{ item.isCorrect ? '●' : '○' }}
+                    </span>
+                    <span class="audit-name">{{ item.playerName }}</span>
+                </div>
+                <span
+                    class="audit-value"
+                    :class="item.isCorrect ? 'text-plus' : 'text-minus'"
+                >
+                    {{ item.isCorrect ? '+' : '-' }}{{ item.value }}
+                </span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -191,13 +210,72 @@ td {
 }
 
 .audit-log {
-    padding: 1rem;
+    padding: 2rem 1.5rem;
     background: black;
+    border-top: 1px solid #1a1a1a;
 }
 
 .audit-header {
-    font-size: 1.5rem;
-    margin: 0;
-    color: #7c7c7c;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+    letter-spacing: 3px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.audit-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.audit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #111;
+}
+
+.audit-row div {
+    display: flex;
+    align-items: center;
+}
+
+.audit-sign {
+    margin-right: 12px;
+    font-size: 1rem;
+}
+
+.audit-sign.plus {
+    color: #00a651;
+}
+
+.audit-sign.minus {
+    color: #d32f2f;
+}
+
+.audit-name {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+.audit-value {
+    font-family: 'Saira Extra Condensed', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    min-width: 60px;
+    text-align: right;
+}
+
+.text-plus {
+    color: #00a651;
+}
+
+.text-minus {
+    color: #d32f2f;
 }
 </style>
