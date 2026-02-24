@@ -98,6 +98,7 @@ header {
     align-items: center;
     background: #222;
     min-width: 120px;
+    text-transform: uppercase;
 }
 
 .name {

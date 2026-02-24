@@ -9,7 +9,7 @@ import { gameStore } from './store';
     <NewGame v-if="gameStore.state.currentRound === 0" />
     <GameBoard v-else />
     <div id="newGameContainer" v-if="gameStore.state.currentRound === 3">
-        <button type="button" id="newGame" @click="gameStore.resetGame">
+        <button type="button" class="btn-start" @click="gameStore.resetGame">
             New Game
         </button>
     </div>
@@ -20,13 +20,33 @@ import { gameStore } from './store';
     position: absolute;
     bottom: 0;
     width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
-#newGame {
-    padding: 2rem;
-    font-size: 2rem;
-    background-color: green;
-    color: white;
+.btn-start {
     width: 100%;
+    background: #00a651;
+    color: white;
+    border: none;
+    padding: 1.8rem;
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Saira Extra Condensed', sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+    transition: all 0.2s ease;
+}
+
+.btn-start:active:not(:disabled) {
+    background: #008541;
+    transform: translateY(-1px);
+}
+
+.btn-start:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    box-shadow: none;
 }
 </style>
