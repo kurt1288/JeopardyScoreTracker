@@ -81,7 +81,7 @@ const getCount = (player: any, round: number, val: number) => {
                 </tr>
                 <tr>
                     <td class="sticky-col board-style-label final-gold">
-                        $5000
+                        5000
                     </td>
                     <td
                         v-for="player in gameStore.playerStats.value"
