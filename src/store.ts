@@ -77,7 +77,12 @@ export const gameStore = {
             const getCount = (round: number, value: number) => {
                 return player.history
                     .filter((h) => h.round === round && h.value === value)
-                    .reduce((acc, h) => acc + (h.isCorrect ? 1 : -1), 0); // sum the occurrences: +1 for correct, -1 for incorrect
+                    .reduce((acc, h) => {
+                        // If it's a normal entry: Correct = +1, Incorrect = -1
+                        // If it's a reversal: Do the exact opposite to "undo" the previous state
+                        const impact = h.isCorrect ? 1 : -1;
+                        return acc + (h.isReversal ? -impact : impact);
+                    }, 0);
             };
 
             return {
@@ -125,6 +130,16 @@ export const gameStore = {
 
         if (!player) return;
 
+        // If it's a correction, flip the 'isAdding' intent.
+        // (Adding + Correction = Subtract) | (Subtracting + Correction = Add)
+        const direction = isCorrection
+            ? isAdding
+                ? -1
+                : 1
+            : isAdding
+              ? 1
+              : -1;
+
         player.history.push({
             timestamp: Date.now(),
             value: points,
@@ -133,9 +148,10 @@ export const gameStore = {
             isReversal: isCorrection,
         });
 
+        // Don't want to apply the points if doing Final Jeopardy round
         if (points === 5000) return;
 
-        player.totalScore += isAdding ? points : -points;
+        player.totalScore += points * direction;
     },
 
     closeModal() {
