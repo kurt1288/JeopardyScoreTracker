@@ -127,8 +127,6 @@ export const gameStore = {
             isCorrect: isAdding,
             isReversal: isCorrection,
         });
-
-        this.closeModal();
     },
 
     closeModal() {

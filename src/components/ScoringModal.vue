@@ -5,8 +5,12 @@ import { gameStore } from '../store';
 const isCorrection = ref(false);
 
 const handleAward = (index: number, isCorrect: boolean) => {
+    const keepOpen = isCorrection.value;
+
     gameStore.awardPoints(index, isCorrect, isCorrection.value);
     isCorrection.value = false;
+
+    if (!keepOpen) gameStore.closeModal();
 };
 
 const closeModal = () => {
@@ -41,7 +45,9 @@ const closeModal = () => {
                         class="zone minus"
                         @click="handleAward(index, false)"
                     >
-                        <span class="symbol">−</span>
+                        <span class="symbol">{{
+                            isCorrection ? '↻' : '−'
+                        }}</span>
                     </button>
 
                     <div class="player-info">
@@ -52,7 +58,9 @@ const closeModal = () => {
                     </div>
 
                     <button class="zone plus" @click="handleAward(index, true)">
-                        <span class="symbol">+</span>
+                        <span class="symbol">{{
+                            isCorrection ? '↺' : '+'
+                        }}</span>
                     </button>
                 </div>
             </div>
