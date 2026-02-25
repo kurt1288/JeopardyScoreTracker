@@ -109,9 +109,14 @@ const getCount = (player: any, round: number, val: number) => {
                         class="audit-sign"
                         :class="item.isCorrect ? 'plus' : 'minus'"
                     >
-                        {{ item.isCorrect ? '●' : '○' }}
+                        {{ item.isReversal ? '↩' : item.isCorrect ? '●' : '○' }}
                     </span>
-                    <span class="audit-name">{{ item.playerName }}</span>
+                    <span class="audit-name"
+                        >{{ item.playerName
+                        }}<small v-if="item.isReversal"
+                            >(Correction)</small
+                        ></span
+                    >
                 </div>
                 <span
                     class="audit-value"
@@ -261,6 +266,10 @@ td {
     text-transform: uppercase;
     color: #999;
     letter-spacing: 1px;
+}
+
+.audit-name small {
+    margin-left: 0.5rem;
 }
 
 .audit-value {

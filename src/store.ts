@@ -18,6 +18,7 @@ interface ScoreEntry {
     value: ValidPointValue;
     round: 0 | 1 | 2 | 3;
     isCorrect: boolean;
+    isReversal?: boolean; // for corrections. indicates the entry "cancels" a previous one
 }
 
 interface Player {
@@ -105,7 +106,11 @@ export const gameStore = {
         });
     },
 
-    awardPoints(playerIndex: number, isCorrect: boolean) {
+    awardPoints(
+        playerIndex: number,
+        isAdding: boolean,
+        isCorrection: boolean = false,
+    ) {
         if (state.pendingPoints === null) return;
 
         const player = state.players[playerIndex];
@@ -113,18 +118,15 @@ export const gameStore = {
 
         if (!player) return;
 
+        player.totalScore += isAdding ? points : -points;
+
         player.history.push({
             timestamp: Date.now(),
             value: points,
             round: state.currentRound,
-            isCorrect: isCorrect,
+            isCorrect: isAdding,
+            isReversal: isCorrection,
         });
-
-        if (isCorrect) {
-            player.totalScore += points;
-        } else {
-            player.totalScore -= points;
-        }
 
         this.closeModal();
     },
