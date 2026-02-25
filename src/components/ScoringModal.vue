@@ -31,7 +31,11 @@ const closeModal = () => {
         >
             <header class="modal-header">
                 <div class="points-badge">
-                    {{ gameStore.state.pendingPoints }}
+                    {{
+                        gameStore.state.pendingPoints === 5000
+                            ? 'Final Jeopardy'
+                            : gameStore.state.pendingPoints
+                    }}
                 </div>
             </header>
 

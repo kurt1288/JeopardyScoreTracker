@@ -79,7 +79,7 @@ const getCount = (player: any, round: number, val: number) => {
                 </tr>
                 <tr>
                     <td class="sticky-col board-style-label final-gold">
-                        5000
+                        Final Jeopardy!
                     </td>
                     <td
                         v-for="player in gameStore.playerStats.value"
@@ -87,9 +87,15 @@ const getCount = (player: any, round: number, val: number) => {
                     >
                         <div
                             class="cell-count"
-                            :class="{ active: player.finalRound.count > 0 }"
+                            :class="{ active: player.finalRound.hasAnswered }"
                         >
-                            {{ player.finalRound.count || '—' }}
+                            {{
+                                player.finalRound.hasAnswered
+                                    ? player.finalRound.isCorrect
+                                        ? '✓'
+                                        : '✕'
+                                    : '—'
+                            }}
                         </div>
                     </td>
                 </tr>
@@ -122,7 +128,8 @@ const getCount = (player: any, round: number, val: number) => {
                     class="audit-value"
                     :class="item.isCorrect ? 'text-plus' : 'text-minus'"
                 >
-                    {{ item.isCorrect ? '+' : '-' }}{{ item.value }}
+                    {{ item.isCorrect ? '+' : '-'
+                    }}{{ item.value === 5000 ? 'Final' : item.value }}
                 </span>
             </div>
         </div>

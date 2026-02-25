@@ -25,7 +25,7 @@ const boards: Record<number, ValidPointValue[]> = {
             :key="val"
             @click="gameStore.selectPoints(val)"
         >
-            <span>{{ val }}</span>
+            <span>{{ val === 5000 ? 'Final' : val }}</span>
         </button>
     </div>
     <ScoringModal />

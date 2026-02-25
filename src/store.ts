@@ -92,7 +92,14 @@ export const gameStore = {
                     v,
                     count: getCount(2, v),
                 })),
-                finalRound: { v: 5000, count: getCount(3, 5000) },
+                finalRound: {
+                    hasAnswered: player.history.some((h) => h.value === 5000),
+                    // Check if the latest 5000-point entry was correct
+                    isCorrect:
+                        player.history
+                            .filter((h) => h.value === 5000)
+                            .slice(-1)[0]?.isCorrect ?? false,
+                },
             };
         });
     }),
@@ -118,8 +125,6 @@ export const gameStore = {
 
         if (!player) return;
 
-        player.totalScore += isAdding ? points : -points;
-
         player.history.push({
             timestamp: Date.now(),
             value: points,
@@ -127,6 +132,10 @@ export const gameStore = {
             isCorrect: isAdding,
             isReversal: isCorrection,
         });
+
+        if (points === 5000) return;
+
+        player.totalScore += isAdding ? points : -points;
     },
 
     closeModal() {
