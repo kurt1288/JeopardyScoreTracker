@@ -21,7 +21,7 @@ If you originally awarded a player 400 points for a correct answer, but the show
     - This removes the 400 points they initially gained without adding an "incorrect" penalty to their stats.
 2. **Log the Incorrect Answer:** Press the "-" button next to the player. This ensures the system tracks that they gave an incorrect response.
 
-Correcting an initial _incorrect_ answer can be done in a similar fashion just with the appropriate "↻" and "+" buttons.
+Correcting an initial _incorrect_ answer can be done in a similar fashion just with the appropriate red "↺" ("undoing" the incorrect answer) and "+" buttons.
 
 ### NOTE
 
