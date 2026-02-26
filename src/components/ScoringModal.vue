@@ -50,7 +50,7 @@ const closeModal = () => {
                         @click="handleAward(index, false)"
                     >
                         <span class="symbol">{{
-                            isCorrection ? '↻' : '−'
+                            isCorrection ? '↺' : '−'
                         }}</span>
                     </button>
 
@@ -113,16 +113,14 @@ const closeModal = () => {
     max-width: 500px;
     background: #121212;
     border-radius: 24px;
-    border: 1px solid #333;
     overflow: hidden;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     transition: border-color 0.3s ease;
 }
 
 .modal-header {
-    padding: 2.5rem 1rem 1.5rem;
+    padding: 2.5rem 1rem;
     text-align: center;
-    background: linear-gradient(to bottom, #1a1a1a, #121212);
 }
 
 .points-badge {
@@ -131,7 +129,6 @@ const closeModal = () => {
     font-weight: 900;
     color: #f8d90e;
     line-height: 1;
-    margin-bottom: 0.5rem;
 }
 
 .instruction {
@@ -147,20 +144,25 @@ const closeModal = () => {
 }
 
 .player-row {
+    background: #1e1e1e;
     display: flex;
-    height: 90px;
-    margin-bottom: 8px;
-    gap: 8px;
+    height: 8rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 4rem;
 }
 
 .zone {
     border: none;
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
     cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border-radius: 10rem;
     transition:
         transform 0.1s,
         background-color 0.2s;
@@ -175,6 +177,7 @@ const closeModal = () => {
 .minus {
     background-color: #b91c1c;
 }
+
 .plus {
     background-color: #00a651;
 }
@@ -194,10 +197,6 @@ const closeModal = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #1e1e1e;
-    border-radius: 12px;
-    border: 1px solid #2a2a2a;
-    transition: background 0.3s;
 }
 
 .name {
@@ -268,6 +267,7 @@ const closeModal = () => {
     letter-spacing: 1px;
     border: none;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .cancel-btn:active {
